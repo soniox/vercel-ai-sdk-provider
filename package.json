@@ -1,0 +1,78 @@
+{
+  "name": "@soniox/ai-sdk-provider",
+  "version": "0.1.0",
+  "description": "Soniox transcription provider for the Vercel AI SDK.",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "pnpm clean && tsup --tsconfig tsconfig.build.json",
+    "build:watch": "pnpm clean && tsup --watch --tsconfig tsconfig.build.json",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "type-check": "tsc --noEmit",
+    "test": "pnpm test:node && pnpm test:edge",
+    "test:watch": "vitest --config vitest.node.config.mjs",
+    "test:edge": "vitest --config vitest.edge.config.mjs --run",
+    "test:node": "vitest --config vitest.node.config.mjs --run",
+    "test:node:watch": "vitest --config vitest.node.config.mjs --watch",
+    "transcribe": "node test/soniox-transcribe.mjs",
+    "publish:local": "npm publish --registry http://localhost:4873"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@ai-sdk/provider": "^3.0.2",
+    "@ai-sdk/provider-utils": "^4.0.4",
+    "ai": "^6.0.28",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@ai-sdk/test-server": "^1.0.1",
+    "@edge-runtime/vm": "^5.0.0",
+    "@types/node": "^20.19.0",
+    "tsup": "^8",
+    "typescript": "5.6.3",
+    "verdaccio": "^6.2.4",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.16"
+  },
+  "peerDependencies": {
+    "zod": "^4.3.5"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/soniox/ai-sdk-provider",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soniox/ai-sdk-provider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soniox/ai-sdk-provider/issues"
+  },
+  "keywords": [
+    "ai",
+    "ai-sdk",
+    "soniox",
+    "transcription",
+    "speech-to-text",
+    "provider"
+  ],
+  "author": "Soniox"
+}

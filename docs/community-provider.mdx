@@ -1,0 +1,47 @@
+---
+title: Soniox
+description: Soniox transcription provider for the Vercel AI SDK.
+---
+
+# Soniox
+
+Soniox is a speech-to-text platform. This community provider integrates Soniox
+transcription models with the Vercel AI SDK.
+
+## Setup
+
+Install the package and set `SONIOX_API_KEY`:
+
+```bash
+pnpm add @soniox/ai-sdk-provider
+```
+
+## Provider Instance
+
+```ts
+import { soniox } from '@soniox/ai-sdk-provider';
+```
+
+## Example
+
+```ts
+import { soniox } from '@soniox/ai-sdk-provider';
+import { experimental_transcribe as transcribe } from 'ai';
+
+const { text } = await transcribe({
+  model: soniox.transcription('stt-async-v3'),
+  audio: new URL(
+    'https://github.com/vercel/ai/raw/refs/heads/main/examples/ai-core/data/galileo.mp3',
+  ),
+});
+```
+
+## Provider Options
+
+`createSoniox` accepts:
+
+- `apiKey`: override `SONIOX_API_KEY`
+- `apiBaseUrl`: custom API base URL
+- `headers`: additional request headers
+- `fetch`: custom fetch implementation
+- `pollingIntervalMs`: transcription polling interval
