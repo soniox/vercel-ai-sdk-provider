@@ -1,6 +1,6 @@
-# Soniox AI SDK Provider (Community)
+# Soniox AI SDK Provider
 
-Community-maintained Soniox provider for the [Vercel AI SDK](https://ai-sdk.dev/docs).
+Official Soniox provider for the [Vercel AI SDK](https://ai-sdk.dev/docs).
 This package currently supports Soniox transcription models.
 
 ## Setup
