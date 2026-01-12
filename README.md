@@ -32,7 +32,6 @@ const soniox = createSoniox({
   headers: {
     'X-Custom-Header': 'value',
   },
-  pollingIntervalMs: 1000,
 });
 ```
 
@@ -41,7 +40,7 @@ Options:
 - `apiBaseUrl`: custom API base URL.
 - `headers`: additional request headers.
 - `fetch`: custom fetch implementation.
-- `pollingIntervalMs`: transcription polling interval in milliseconds.
+- `pollingIntervalMs`: transcription polling interval in milliseconds. Default is 1000ms.
 
 ## Supported Model IDs
 
