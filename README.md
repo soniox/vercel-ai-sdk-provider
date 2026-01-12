@@ -42,9 +42,6 @@ Options:
 - `fetch`: custom fetch implementation.
 - `pollingIntervalMs`: transcription polling interval in milliseconds. Default is 1000ms.
 
-## Supported Model IDs
-
-- `stt-async-v3`
 
 ## Example
 
