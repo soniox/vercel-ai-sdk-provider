@@ -8,7 +8,7 @@ This package currently supports Soniox transcription models.
 Install the provider:
 
 ```bash
-pnpm add @soniox/ai-sdk-provider
+npm install @soniox/ai-sdk-provider
 ```
 
 ## Provider Instance

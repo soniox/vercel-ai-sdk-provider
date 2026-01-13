@@ -5,7 +5,7 @@ import { createSoniox } from '../dist/index.mjs';
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 
-// RUN: SONIOX_API_KEY=your-api-key pnpm transcribe
+// RUN: SONIOX_API_KEY=your-api-key npm run transcribe
 
 // Parse arguments: [audio-file] [api-key]
 // eslint-disable-next-line turbo/no-undeclared-env-vars
@@ -16,8 +16,8 @@ const apiKey = args[1] ?? apiKeyFromEnv;
 
 if (!apiKey) {
   console.error('Error: API key is required.');
-  console.error('Usage: pnpm transcribe [audio-file] [api-key]');
-  console.error('   or: SONIOX_API_KEY=your-key pnpm transcribe [audio-file]');
+  console.error('Usage: npm run transcribe [audio-file] [api-key]');
+  console.error('   or: SONIOX_API_KEY=your-key npm run transcribe [audio-file]');
   console.error(
     '   or: node test/soniox-transcribe.mjs [audio-file] [api-key]',
   );

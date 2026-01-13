@@ -13,11 +13,11 @@
     "README.md"
   ],
   "scripts": {
-    "build": "pnpm clean && tsup --tsconfig tsconfig.build.json",
-    "build:watch": "pnpm clean && tsup --watch --tsconfig tsconfig.build.json",
+    "build": "npm run clean && tsup --tsconfig tsconfig.build.json",
+    "build:watch": "npm run clean && tsup --watch --tsconfig tsconfig.build.json",
     "clean": "rm -rf dist *.tsbuildinfo",
     "type-check": "tsc --noEmit",
-    "test": "pnpm test:node && pnpm test:edge",
+    "test": "npm run test:node && npm run test:edge",
     "test:watch": "vitest --config vitest.node.config.mjs",
     "test:edge": "vitest --config vitest.edge.config.mjs --run",
     "test:node": "vitest --config vitest.node.config.mjs --run",

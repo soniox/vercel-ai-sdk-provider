@@ -3,7 +3,7 @@
 Start Verdaccio:
 
 ```bash
-pnpm verdaccio --config verdaccio.yaml
+npx verdaccio --config verdaccio.yaml
 ```
 
 Login and publish to the local registry:
@@ -17,7 +17,7 @@ Install from another project:
 
 ```bash
 npm set registry http://localhost:4873
-pnpm add @soniox/ai-sdk-provider
+npm install @soniox/ai-sdk-provider
 ```
 
 Reset the registry after testing:
