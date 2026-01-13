@@ -17,7 +17,7 @@ Install from another project:
 
 ```bash
 npm set registry http://localhost:4873
-npm install @soniox/ai-sdk-provider
+npm install @soniox/vercel-ai-sdk-provider
 ```
 
 Reset the registry after testing:

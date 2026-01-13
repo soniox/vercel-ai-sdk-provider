@@ -1,5 +1,5 @@
 {
-  "name": "@soniox/ai-sdk-provider",
+  "name": "@soniox/vercel-ai-sdk-provider",
   "version": "0.1.0",
   "description": "Soniox transcription provider for the Vercel AI SDK.",
   "license": "MIT",

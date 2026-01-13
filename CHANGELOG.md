@@ -1,4 +1,4 @@
-# @soniox/ai-sdk-provider
+# @soniox/vercel-ai-sdk-provider
 
 ## 0.1.0
 

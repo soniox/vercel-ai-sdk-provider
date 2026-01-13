@@ -8,15 +8,15 @@ This package currently supports Soniox transcription models.
 Install the provider:
 
 ```bash
-npm install @soniox/ai-sdk-provider
+npm install @soniox/vercel-ai-sdk-provider
 ```
 
 ## Provider Instance
 
-Import the default provider instance `soniox` from `@soniox/ai-sdk-provider`:
+Import the default provider instance `soniox` from `@soniox/vercel-ai-sdk-provider`:
 
 ```ts
-import { soniox } from '@soniox/ai-sdk-provider';
+import { soniox } from '@soniox/vercel-ai-sdk-provider';
 ```
 
 ## createSoniox Options
@@ -24,7 +24,7 @@ import { soniox } from '@soniox/ai-sdk-provider';
 You can create a custom provider instance:
 
 ```ts
-import { createSoniox } from '@soniox/ai-sdk-provider';
+import { createSoniox } from '@soniox/vercel-ai-sdk-provider';
 
 const soniox = createSoniox({
   apiKey: process.env.SONIOX_API_KEY,
@@ -46,7 +46,7 @@ Options:
 ## Example
 
 ```ts
-import { soniox } from '@soniox/ai-sdk-provider';
+import { soniox } from '@soniox/vercel-ai-sdk-provider';
 import { experimental_transcribe as transcribe } from 'ai';
 
 const { text } = await transcribe({

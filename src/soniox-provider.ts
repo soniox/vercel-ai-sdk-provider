@@ -2,21 +2,18 @@ import {
   TranscriptionModelV3,
   ProviderV3,
   NoSuchModelError,
-} from '@ai-sdk/provider';
+} from "@ai-sdk/provider";
 import {
   FetchFunction,
   loadApiKey,
   withUserAgentSuffix,
-} from '@ai-sdk/provider-utils';
-import { SonioxTranscriptionModel } from './soniox-transcription-model';
-import { SonioxTranscriptionModelId } from './soniox-transcription-options';
-import { VERSION } from './version';
+} from "@ai-sdk/provider-utils";
+import { SonioxTranscriptionModel } from "./soniox-transcription-model";
+import { SonioxTranscriptionModelId } from "./soniox-transcription-options";
+import { VERSION } from "./version";
 
 export interface SonioxProvider extends ProviderV3 {
-  (
-    modelId: string,
-    settings?: {},
-  ): {
+  (modelId: string, settings?: {}): {
     transcription: SonioxTranscriptionModel;
   };
 
@@ -63,22 +60,22 @@ Polling interval for async transcription status checks in milliseconds.
 Create a Soniox provider instance.
  */
 export function createSoniox(
-  options: SonioxProviderSettings = {},
+  options: SonioxProviderSettings = {}
 ): SonioxProvider {
   const getHeaders = () =>
     withUserAgentSuffix(
       {
         authorization: `Bearer ${loadApiKey({
           apiKey: options.apiKey,
-          environmentVariableName: 'SONIOX_API_KEY',
-          description: 'Soniox',
+          environmentVariableName: "SONIOX_API_KEY",
+          description: "Soniox",
         })}`,
         ...options.headers,
       },
-      `soniox/ai-sdk-provider/${VERSION}`,
+      `soniox/vercel-ai-sdk-provider/${VERSION}`
     );
 
-  const apiBaseUrl = options.apiBaseUrl ?? 'https://api.soniox.com';
+  const apiBaseUrl = options.apiBaseUrl ?? "https://api.soniox.com";
 
   const createTranscriptionModel = (modelId: SonioxTranscriptionModelId) =>
     new SonioxTranscriptionModel(modelId, {
@@ -95,23 +92,23 @@ export function createSoniox(
     };
   };
 
-  provider.specificationVersion = 'v3' as const;
+  provider.specificationVersion = "v3" as const;
   provider.transcription = createTranscriptionModel;
   provider.transcriptionModel = createTranscriptionModel;
 
   provider.languageModel = (modelId: string) => {
     throw new NoSuchModelError({
       modelId,
-      modelType: 'languageModel',
-      message: 'Soniox does not provide language models',
+      modelType: "languageModel",
+      message: "Soniox does not provide language models",
     });
   };
 
   provider.embeddingModel = (modelId: string) => {
     throw new NoSuchModelError({
       modelId,
-      modelType: 'embeddingModel',
-      message: 'Soniox does not provide embedding models',
+      modelType: "embeddingModel",
+      message: "Soniox does not provide embedding models",
     });
   };
   provider.textEmbeddingModel = provider.embeddingModel;
@@ -119,8 +116,8 @@ export function createSoniox(
   provider.imageModel = (modelId: string) => {
     throw new NoSuchModelError({
       modelId,
-      modelType: 'imageModel',
-      message: 'Soniox does not provide image models',
+      modelType: "imageModel",
+      message: "Soniox does not provide image models",
     });
   };
 
