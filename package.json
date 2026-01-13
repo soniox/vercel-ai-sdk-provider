@@ -58,13 +58,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/soniox/ai-sdk-provider",
+  "homepage": "https://github.com/soniox/vercel-ai-sdk-provider",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soniox/ai-sdk-provider.git"
+    "url": "git+https://github.com/soniox/vercel-ai-sdk-provider.git"
   },
   "bugs": {
-    "url": "https://github.com/soniox/ai-sdk-provider/issues"
+    "url": "https://github.com/soniox/vercel-ai-sdk-provider/issues"
   },
   "keywords": [
     "ai",
