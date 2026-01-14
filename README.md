@@ -1,47 +1,17 @@
-# Soniox AI SDK Provider
+# Vercel AI SDK
 
-Official Soniox provider for the [Vercel AI SDK](https://ai-sdk.dev/docs).
-This package currently supports Soniox transcription models.
+[Vercel AI SDK](https://sdk.vercel.ai/) is a library for building AI applications. This provider integrates Soniox
+transcription models with the Vercel AI SDK.
 
-## Setup
-
-Install the provider:
+## Installation
 
 ```bash
 npm install @soniox/vercel-ai-sdk-provider
 ```
 
-## Provider Instance
+## Authentication
 
-Import the default provider instance `soniox` from `@soniox/vercel-ai-sdk-provider`:
-
-```ts
-import { soniox } from '@soniox/vercel-ai-sdk-provider';
-```
-
-## createSoniox Options
-
-You can create a custom provider instance:
-
-```ts
-import { createSoniox } from '@soniox/vercel-ai-sdk-provider';
-
-const soniox = createSoniox({
-  apiKey: process.env.SONIOX_API_KEY,
-  apiBaseUrl: 'https://api.soniox.com',
-  headers: {
-    'X-Custom-Header': 'value',
-  },
-});
-```
-
-Options:
-- `apiKey`: override `SONIOX_API_KEY`.
-- `apiBaseUrl`: custom API base URL.
-- `headers`: additional request headers.
-- `fetch`: custom fetch implementation.
-- `pollingIntervalMs`: transcription polling interval in milliseconds. Default is 1000ms.
-
+Set `SONIOX_API_KEY` in your environment or pass `apiKey` when creating the provider.
 
 ## Example
 
@@ -57,9 +27,117 @@ const { text } = await transcribe({
 });
 ```
 
-## Authentication
+## Provider options
 
-Set `SONIOX_API_KEY` in your environment or pass `apiKey` when creating the provider.
+Use `createSoniox` to customize the provider instance:
+
+```ts
+import { createSoniox } from '@soniox/vercel-ai-sdk-provider';
+
+const soniox = createSoniox({
+  apiKey: process.env.SONIOX_API_KEY,
+  apiBaseUrl: 'https://api.soniox.com',
+});
+```
+
+Options:
+- `apiKey`: override `SONIOX_API_KEY`.
+- `apiBaseUrl`: custom API base URL. See list of regional API endpoints [here](https://soniox.com/docs/stt/data-residency#regional-endpoints).
+- `headers`: additional request headers.
+- `fetch`: custom fetch implementation.
+- `pollingIntervalMs`: transcription polling interval in milliseconds. Default is 1000ms.
+
+## Transcription options
+
+Per-request options are passed via `providerOptions`:
+
+```ts
+const { text } = await transcribe({
+  model: soniox.transcription('stt-async-v3'),
+  audio,
+  providerOptions: {
+    soniox: {
+      languageHints: ['en', 'es'],
+      enableLanguageIdentification: true,
+      enableSpeakerDiarization: true,
+      context: {
+        terms: ["Soniox", "Vercel"]
+      },
+    },
+  },
+});
+```
+
+Available options:
+- `languageHints`
+- `languageHintsStrict`
+- `enableLanguageIdentification`
+- `enableSpeakerDiarization`
+- `context`
+- `clientReferenceId`
+- `webhookUrl`
+- `webhookAuthHeaderName`
+- `webhookAuthHeaderValue`
+- `translation`
+
+Check the [Soniox API reference](https://soniox.com/docs/stt/api-reference/transcriptions/create_transcription) for more details.
+
+## Language hints
+
+Soniox automatically detects and transcribes speech in [**60+ languages**](https://soniox.com/docs/stt/concepts/supported-languages). When you know which languages are likely to appear in your audio, provide `languageHints` to improve accuracy by biasing recognition toward those languages.
+
+Language hints **do not restrict** recognition — they only **bias** the model toward the specified languages, while still allowing other languages to be detected if present.
+
+```ts
+const { text } = await transcribe({
+  model: soniox.transcription('stt-async-v3'),
+  audio,
+  providerOptions: {
+    soniox: {
+      languageHints: ['en', 'es'], // ISO language codes
+      languageHintsStrict: true, // When true, rely more on language hints
+    },
+  },
+});
+```
+
+For more details, see the [Soniox language hints documentation](https://soniox.com/docs/stt/concepts/language-hints).
+
+## Context
+
+Provide custom context to improve transcription and translation accuracy. Context helps the model understand your domain, recognize important terms, and apply custom vocabulary.
+
+The `context` object supports four optional sections:
+
+```ts
+const { text } = await transcribe({
+  model: soniox.transcription('stt-async-v3'),
+  audio,
+  providerOptions: {
+    soniox: {
+      context: {
+        // Structured key-value information (domain, topic, intent, etc.)
+        general: [
+          { key: 'domain', value: 'Healthcare' },
+          { key: 'topic', value: 'Diabetes management consultation' },
+          { key: 'doctor', value: 'Dr. Martha Smith' },
+        ],
+        // Longer free-form background text or related documents
+        text: 'The patient has a history of...',
+        // Domain-specific or uncommon words
+        terms: ['Celebrex', 'Zyrtec', 'Xanax'],
+        // Custom translations for ambiguous terms
+        translationTerms: [
+          { source: 'Mr. Smith', target: 'Sr. Smith' },
+          { source: 'MRI', target: 'RM' },
+        ],
+      },
+    },
+  },
+});
+```
+
+For more details, see the [Soniox context documentation](https://soniox.com/docs/stt/concepts/context).
 
 ## Documentation
 

@@ -265,6 +265,7 @@ export class SonioxTranscriptionModel implements TranscriptionModelV3 {
         model: this.modelId,
         file_id: fileId,
         language_hints: sonioxOptions?.languageHints ?? undefined,
+        language_hints_strict: sonioxOptions?.languageHintsStrict ?? undefined,
         enable_language_identification:
           sonioxOptions?.enableLanguageIdentification ?? undefined,
         enable_speaker_diarization:

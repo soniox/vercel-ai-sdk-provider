@@ -29,6 +29,7 @@ export type SonioxCreateTranscriptionRequest = {
   audio_url?: string;
   file_id?: string;
   language_hints?: string[];
+  language_hints_strict?: boolean;
   enable_language_identification?: boolean;
   enable_speaker_diarization?: boolean;
   context?: SonioxContext;

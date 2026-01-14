@@ -43,6 +43,10 @@ export const sonioxTranscriptionProviderOptionsSchema = z.object({
    */
   languageHints: z.array(z.string()).nullish(),
   /**
+   * When true, the model will rely more on language hints.
+   */
+  languageHintsStrict: z.boolean().nullish(),
+  /**
    * Whether to enable automatic language identification.
    */
   enableLanguageIdentification: z.boolean().nullish(),
