@@ -23,7 +23,7 @@ import { experimental_transcribe as transcribe } from 'ai';
 const { text } = await transcribe({
   model: soniox.transcription('stt-async-v3'),
   audio: new URL(
-    'https://github.com/vercel/ai/raw/refs/heads/main/examples/ai-core/data/galileo.mp3',
+    'https://soniox.com/media/examples/coffee_shop.mp3',
   ),
 });
 ```
