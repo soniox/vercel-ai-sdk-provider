@@ -12,6 +12,7 @@ npm install @soniox/vercel-ai-sdk-provider
 ## Authentication
 
 Set `SONIOX_API_KEY` in your environment or pass `apiKey` when creating the provider.
+Get your API key from the [Soniox Console](https://console.soniox.com).
 
 ## Example
 
