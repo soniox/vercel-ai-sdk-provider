@@ -95,7 +95,6 @@ const { text } = await transcribe({
   providerOptions: {
     soniox: {
       languageHints: ['en', 'es'], // ISO language codes
-      languageHintsStrict: true, // When true, rely more on language hints
     },
   },
 });
