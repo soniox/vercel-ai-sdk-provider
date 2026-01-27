@@ -197,4 +197,57 @@ describe("doGenerate", () => {
       },
     });
   });
+
+  it("should cleanup resources on abort during polling", async () => {
+    prepareJsonResponse();
+
+    // Mock polling to stay in 'queued' status
+    server.urls[
+      "https://api.soniox.com/v1/transcriptions/transcription-123"
+    ].response = {
+      type: "json-value",
+      body: {
+        id: "transcription-123",
+        status: "queued",
+      },
+    };
+
+    const abortController = new AbortController();
+
+    // Start doGenerate with a small polling interval for testing
+    const provider = createSoniox({
+      apiKey: "test-api-key",
+      pollingIntervalMs: 100,
+    });
+    const model = provider.transcription("stt-async-v3");
+
+    const promise = model.doGenerate({
+      audio: audioData,
+      mediaType: "audio/wav",
+      abortSignal: abortController.signal,
+    });
+
+    // Wait for the first few requests to complete
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    
+    abortController.abort();
+
+    await expect(promise).rejects.toThrow();
+
+    // Verify cleanup calls
+    const deleteFileCall = server.calls.find(
+      (c) =>
+        c.requestUrl === "https://api.soniox.com/v1/files/file-123" &&
+        c.requestMethod === "DELETE"
+    );
+    const deleteTranscriptionCall = server.calls.find(
+      (c) =>
+        c.requestUrl ===
+          "https://api.soniox.com/v1/transcriptions/transcription-123" &&
+        c.requestMethod === "DELETE"
+    );
+
+    expect(deleteFileCall).toBeDefined();
+    expect(deleteTranscriptionCall).toBeDefined();
+  });
 });

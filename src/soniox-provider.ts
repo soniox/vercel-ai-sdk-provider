@@ -54,6 +54,12 @@ or to provide a custom fetch implementation for e.g. testing.
 Polling interval for async transcription status checks in milliseconds.
      */
   pollingIntervalMs?: number;
+
+  /**
+   * Timeout for transcription job polling in milliseconds.
+   * Default: 300,000 (5 minutes).
+   */
+  timeoutMs?: number;
 }
 
 /**
@@ -84,6 +90,7 @@ export function createSoniox(
       headers: getHeaders,
       fetch: options.fetch,
       pollingIntervalMs: options.pollingIntervalMs,
+      timeoutMs: options.timeoutMs,
     });
 
   const provider = function (modelId: SonioxTranscriptionModelId) {

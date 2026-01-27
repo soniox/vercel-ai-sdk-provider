@@ -65,11 +65,13 @@ interface SonioxTranscriptionModelConfig extends SonioxConfig {
     currentDate?: () => Date;
   };
   pollingIntervalMs?: number;
+  timeoutMs?: number;
 }
 
 export class SonioxTranscriptionModel implements TranscriptionModelV3 {
   readonly specificationVersion = 'v3';
   private readonly POLLING_INTERVAL_MS = 1000;
+  private readonly TIMEOUT_MS = 5 * 60 * 1000;
 
   get provider(): string {
     return this.config.provider;
@@ -299,7 +301,7 @@ export class SonioxTranscriptionModel implements TranscriptionModelV3 {
 
       const pollingInterval =
         this.config.pollingIntervalMs ?? this.POLLING_INTERVAL_MS;
-      const timeoutMs = 3 * 60 * 1000;
+      const timeoutMs = this.config.timeoutMs ?? this.TIMEOUT_MS;
       const startTime = Date.now();
 
       let statusResponse:
