@@ -11,7 +11,7 @@ vi.mock("./version", () => ({
 
 const audioData = await readFile(path.join(__dirname, "transcript-test.mp3"));
 const provider = createSoniox({ apiKey: "test-api-key" });
-const model = provider.transcription("stt-async-v3");
+const model = provider.transcription("stt-async-v4");
 
 const server = createTestServer({
   "https://api.soniox.com/v1/files": {
@@ -108,7 +108,7 @@ describe("doGenerate", () => {
       },
     });
 
-    await provider.transcription("stt-async-v3").doGenerate({
+    await provider.transcription("stt-async-v4").doGenerate({
       audio: audioData,
       mediaType: "audio/wav",
       headers: {
@@ -174,7 +174,7 @@ describe("doGenerate", () => {
     });
 
     const testDate = new Date(0);
-    const customModel = new SonioxTranscriptionModel("stt-async-v3", {
+    const customModel = new SonioxTranscriptionModel("stt-async-v4", {
       provider: "test-provider",
       url: ({ path }) => `https://api.soniox.com${path}`,
       headers: () => ({}),
@@ -190,7 +190,7 @@ describe("doGenerate", () => {
 
     expect(result.response).toMatchObject({
       timestamp: testDate,
-      modelId: "stt-async-v3",
+      modelId: "stt-async-v4",
       headers: {
         "content-type": "application/json",
         "x-request-id": "test-request-id",
@@ -219,7 +219,7 @@ describe("doGenerate", () => {
       apiKey: "test-api-key",
       pollingIntervalMs: 100,
     });
-    const model = provider.transcription("stt-async-v3");
+    const model = provider.transcription("stt-async-v4");
 
     const promise = model.doGenerate({
       audio: audioData,

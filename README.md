@@ -21,7 +21,7 @@ import { soniox } from '@soniox/vercel-ai-sdk-provider';
 import { experimental_transcribe as transcribe } from 'ai';
 
 const { text } = await transcribe({
-  model: soniox.transcription('stt-async-v3'),
+  model: soniox.transcription('stt-async-v4'),
   audio: new URL(
     'https://soniox.com/media/examples/coffee_shop.mp3',
   ),
@@ -54,7 +54,7 @@ Per-request options are passed via `providerOptions`:
 
 ```ts
 const { text } = await transcribe({
-  model: soniox.transcription('stt-async-v3'),
+  model: soniox.transcription('stt-async-v4'),
   audio,
   providerOptions: {
     soniox: {
@@ -91,7 +91,7 @@ Language hints **do not restrict** recognition — they only **bias** the model 
 
 ```ts
 const { text } = await transcribe({
-  model: soniox.transcription('stt-async-v3'),
+  model: soniox.transcription('stt-async-v4'),
   audio,
   providerOptions: {
     soniox: {
@@ -111,7 +111,7 @@ The `context` object supports four optional sections:
 
 ```ts
 const { text } = await transcribe({
-  model: soniox.transcription('stt-async-v3'),
+  model: soniox.transcription('stt-async-v4'),
   audio,
   providerOptions: {
     soniox: {

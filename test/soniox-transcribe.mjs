@@ -28,7 +28,7 @@ const soniox = createSoniox({ apiKey });
 
 const audio = await readFile(audioPath);
 const result = await transcribe({
-  model: soniox.transcription('stt-async-v3'),
+  model: soniox.transcription('stt-async-v4'),
   audio,
 });
 

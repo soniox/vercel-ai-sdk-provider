@@ -1,6 +1,6 @@
 import { z } from 'zod/v4';
 
-export type SonioxTranscriptionModelId = 'stt-async-v3' | (string & {});
+export type SonioxTranscriptionModelId = 'stt-async-v3' | 'stt-async-v4' | (string & {});
 
 const sonioxContextSchema = z
   .object({
